@@ -26,11 +26,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools wheel
 
-WORKDIR /opt
-
 WORKDIR /opt/comfyui
 
-RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git .
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git
 
 
 RUN pip install \

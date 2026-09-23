@@ -28,10 +28,10 @@ RUN pip install --upgrade pip setuptools wheel
 
 WORKDIR /opt
 
-RUN git clone --depth 1 \
-    https://github.com/comfyanonymous/ComfyUI.git
+WORKDIR /opt/comfyui
 
-WORKDIR /opt/ComfyUI
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git .
+
 
 RUN pip install \
     torch \
@@ -41,13 +41,14 @@ RUN pip install \
 
 RUN pip install -r requirements.txt
 
-RUN mkdir -p \
-    /opt/ComfyUI/models \
-    /opt/ComfyUI/input \
-    /opt/ComfyUI/output \
-    /opt/ComfyUI/user \
-    /opt/ComfyUI/custom_nodes
+# ---- ComfyUI-Manager ----
+RUN git clone --depth 1 https://github.com/Comfy-Org/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager \
+    && pip3 install --no-cache-dir -r custom_nodes/ComfyUI-Manager/requirements.txt
+ 
+# ---- ComfyUI-ReActor ----
+RUN git clone --depth 1 https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/comfyui-reactor-node \
+    && pip3 install --no-cache-dir -r custom_nodes/comfyui-reactor-node/requirements.txt
 
 EXPOSE 8188
 
-CMD ["python", "main.py", "--listen", "0.0.0.0", "--port", "8188"]
+CMD ["python3", "main.py", "--listen", "0.0.0.0", "--port", "8188", "--enable-manager"]

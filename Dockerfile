@@ -44,6 +44,7 @@ RUN git clone --depth 1 https://github.com/Comfy-Org/ComfyUI-Manager.git custom_
 # ---- ComfyUI-ReActor ----
 RUN git clone --depth 1 https://github.com/Gourieff/ComfyUI-ReActor custom_nodes/comfyui-reactor \
     && pip install -r custom_nodes/comfyui-reactor/requirements.txt
+RUN sed '38a\    return False' custom_nodes/comfyui-reactor/scripts/reactor_sfw.py
 
 EXPOSE 8188
 

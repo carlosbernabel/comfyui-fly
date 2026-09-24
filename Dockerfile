@@ -21,15 +21,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv /opt/venv
-
 ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools wheel
 
 WORKDIR /opt/comfyui
 
-RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git
-
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git .
 
 RUN pip install \
     torch \
@@ -41,11 +39,11 @@ RUN pip install -r requirements.txt
 
 # ---- ComfyUI-Manager ----
 RUN git clone --depth 1 https://github.com/Comfy-Org/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager \
-    && pip3 install --no-cache-dir -r custom_nodes/ComfyUI-Manager/requirements.txt
- 
+    && pip install -r custom_nodes/ComfyUI-Manager/requirements.txt
+
 # ---- ComfyUI-ReActor ----
 RUN git clone --depth 1 https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/comfyui-reactor-node \
-    && pip3 install --no-cache-dir -r custom_nodes/comfyui-reactor-node/requirements.txt
+    && pip install -r custom_nodes/comfyui-reactor-node/requirements.txt
 
 EXPOSE 8188
 

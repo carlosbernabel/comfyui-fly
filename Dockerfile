@@ -42,8 +42,8 @@ RUN git clone --depth 1 https://github.com/Comfy-Org/ComfyUI-Manager.git custom_
     && pip install -r custom_nodes/ComfyUI-Manager/requirements.txt
 
 # ---- ComfyUI-ReActor ----
-RUN git clone --depth 1 https://github.com/Gourieff/comfyui-reactor-node.git custom_nodes/comfyui-reactor-node \
-    && pip install -r custom_nodes/comfyui-reactor-node/requirements.txt
+RUN git clone --depth 1 https://github.com/Gourieff/ComfyUI-ReActor custom_nodes/comfyui-reactor \
+    && pip install -r custom_nodes/comfyui-reactor/requirements.txt
 
 EXPOSE 8188
 

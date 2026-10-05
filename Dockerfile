@@ -46,6 +46,8 @@ RUN git clone --depth 1 https://github.com/Gourieff/ComfyUI-ReActor custom_nodes
     && pip install -r custom_nodes/comfyui-reactor/requirements.txt
 RUN sed -i '37a\ \ \ \ return False' custom_nodes/comfyui-reactor/scripts/reactor_sfw.py
 
+RUN pip install -U --pre comfyui-manager
+
 EXPOSE 8188
 
 CMD ["python3", "main.py", "--listen", "0.0.0.0", "--port", "8188", "--enable-manager"]

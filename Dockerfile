@@ -24,6 +24,8 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools wheel
+RUN pip install -U --pre comfyui-manager
+RUN pip install --pre onnxruntime insightface
 
 WORKDIR /opt/comfyui
 
@@ -33,7 +35,7 @@ RUN pip install \
     torch \
     torchvision \
     torchaudio \
-    --index-url https://download.pytorch.org/whl/cu128
+    --index-url https://download.pytorch.org/whl/cu130
 
 RUN pip install -r requirements.txt
 
@@ -46,8 +48,6 @@ RUN git clone --depth 1 https://github.com/Gourieff/ComfyUI-ReActor custom_nodes
     && pip install -r custom_nodes/comfyui-reactor/requirements.txt
 RUN sed -i '37a\ \ \ \ return False' custom_nodes/comfyui-reactor/scripts/reactor_sfw.py
 
-RUN pip install -U --pre comfyui-manager
-RUN pip install --pre onnxruntime insightface
 
 EXPOSE 8188
 

@@ -47,6 +47,7 @@ RUN git clone --depth 1 https://github.com/Gourieff/ComfyUI-ReActor custom_nodes
 RUN sed -i '37a\ \ \ \ return False' custom_nodes/comfyui-reactor/scripts/reactor_sfw.py
 
 RUN pip install -U --pre comfyui-manager
+RUN pip install --pre onnxruntime insightface
 
 EXPOSE 8188
 
